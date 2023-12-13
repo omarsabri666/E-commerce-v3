@@ -1,0 +1,1 @@
+import{r as o}from"./index-227f15af.js";function u(){const[t,e]=o.useState(!1);function r(){e(s=>!s)}const[a,g]=o.useState(!1);function n(){g(s=>!s)}return{togglePassword:t,togglePasswordVis:r,togglePassword2:a,togglePasswordVis2:n}}export{u};
