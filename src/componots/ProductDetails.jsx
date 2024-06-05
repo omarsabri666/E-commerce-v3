@@ -13,6 +13,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import LikeProduct from "./LikeProduct";
+import { ThreeDots } from "react-loader-spinner";
+
  const settings = {
    infinite: true,
    speed: 500,
@@ -70,7 +72,7 @@ queryClient.invalidateQueries({ queryKey: ["cart"] });
     },onError:()=>{
          toast.error("could not add item to the cart ");
     }})
-    const {mutate:deleteMutate,} = useMutation({mutationFn:()=>DeleteOneItem(id) ,onSuccess:()=>{
+    const {mutate:deleteMutate,isLoading:isLoadingCartDelete} = useMutation({mutationFn:()=>DeleteOneItem(id) ,onSuccess:()=>{
 
    
 queryClient.invalidateQueries({ queryKey: ["cart"] }); 
@@ -89,7 +91,7 @@ toast.info("item was deleted from cart ");    //   queryClient.invalidateQueries
     
     const isInCart = test1.includes(id);
  
-    const { mutate: addToWishlist } = useMutation({
+    const { mutate: addToWishlist ,isLoading:isLoadingWish} = useMutation({
       mutationFn: () => addWishlistItems(id),
       onSuccess:()=>{
         queryClient.invalidateQueries(["wishlist"]);
@@ -99,7 +101,7 @@ toast.info("item was deleted from cart ");    //   queryClient.invalidateQueries
         toast.error("could not add item to the wishlist ");
       }
     });
-    const { mutate: deleteWishlist } = useMutation({
+    const { mutate: deleteWishlist,isLoading:isLoadingDeleteWish } = useMutation({
       mutationFn: () => deleteWishlistItem(id),
       onSuccess: () => {
         queryClient.invalidateQueries(["wishlist"]);
@@ -137,9 +139,9 @@ const isInWishlist = Array.isArray(wishlistData?.data)
     </div>
       return (
         <>
-          <div className=" my-10  grid mx-4 md:flex font-abc  md:justify-around  md:mx-0 grid-cols-1 gap-6  sm:grid-cols-4 ">
-            <div className="   pl-14 ">
-              <div className=" flex flex-wrap justify-center items-center gap-1 flex-col ">
+          <div className=" my-10  grid  mx-7 md:flex font-abc  md:justify-around  md:mx-0 grid-cols-1 gap-6   ">
+            <div className=" col-span-2 md:items-center md:justify-center flex-col-reverse md:flex-row  md:basis-1/2 gap-4 flex ">
+              <div className=" flex   justify-center items-center gap-1 md:flex-col ">
                 {data?.data.images?.map((img, i) => (
                   <ImgSlider
                     setSelectedImg={setSelectedImg}
@@ -148,9 +150,7 @@ const isInWishlist = Array.isArray(wishlistData?.data)
                   />
                 ))}
               </div>
-            </div>
-            <div className=" col-span-2 md:items-center  md:basis-1/2 gap-4 flex flex-col">
-              <div className=" md:h-[80%]   rounded-md  ">
+              <div className=" md:h-[80%]  flex justify-center  rounded-md  ">
                 <img
                   className=" sm:w-96 md:h-full  rounded-md    w-full    "
                   src={mainImgSrc}
@@ -158,7 +158,7 @@ const isInWishlist = Array.isArray(wishlistData?.data)
                 />
               </div>
             </div>
-            <div className=" items-start md:basis-1/2   flex flex-col ">
+            <div className=" md:items-start items-center md:basis-1/2   justify-center  flex flex-col ">
               <div className=" flex flex-col gap-4">
                 {/* <h1 className=" text-4xl font-bold text-omar my-4">
                 {data?.data?.category?.name}
@@ -171,14 +171,14 @@ const isInWishlist = Array.isArray(wishlistData?.data)
                     {data?.data?.brand?.name}
                   </h3>
                 </div>
-                <div className=" flex justify-around gap-2 items-center  border-b-2 ">
+                <div className=" flex justify-around gap-2 flex-col md:flex-row items-center  border-b-2 ">
                   {!data?.data?.priceAfterDiscount ? (
-                    <h4 className="text-omar text-xl font-semibold py-2">
+                    <h4 className="text-black text-xl font-semibold py-2">
                       {formatPriceInEGP(data?.data?.price)}
                     </h4>
                   ) : (
                     <div className="gap-5 py-2 text-xl   flex">
-                      <h4 className="text-omar font-semibold">
+                      <h4 className="text-black font-semibold">
                         {formatPriceInEGP(data?.data?.priceAfterDiscount)}
                       </h4>
                       <h4 className="line-through text-gray-600">
@@ -211,7 +211,7 @@ const isInWishlist = Array.isArray(wishlistData?.data)
               <div className=" flex flex-col gap-2 my-5   ">
                 <h3 className="  font-bold text-lg">description : </h3>
 
-                <p className=" border-b-2   w-2/3  ">
+                <p className=" border-b-2  w-full  md:w-2/3  ">
                   {" "}
                   {data?.data?.description}
                 </p>
@@ -220,57 +220,103 @@ const isInWishlist = Array.isArray(wishlistData?.data)
               {/* <h5>{formatPriceInEGP(data?.data?.priceAfterDiscount)}</h5> */}
               <div className=" my-2 flex gap-6 flex-col ">
                 {token && (
-                  <div className=" flex items-center gap-1">
+                  <div className=" flex items-center gap-5">
                     {!isRefetching ? (
                       <div>
                         {!isInCart && (
                           <button
                             disabled={isLoading}
                             onClick={() => mutate({})}
-                            className=" py-2 px-6 bg-omar hover:bg-orange-700 transition-all text-white  font-semibold rounded-lg"
+                            className=" py-2 px-6 bg-black  transition-all text-white  font-semibold rounded-sm"
                           >
-                            Add To Cart
+                            {isLoading ? (
+                              <ThreeDots
+                                visible={true}
+                                height="24"
+                                width="82"
+                                color="#ffffff"
+                                secondaryColor="#EFE6E3"
+                                ariaLabel="oval-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                              />
+                            ) : (
+                              " Add To Cart"
+                            )}
                           </button>
                         )}
                         {isInCart && (
                           <button
                             onClick={deleteMutate}
-                            className="py-2 px-6 bg-omar hover:bg-orange-700 transition-all text-white  font-semibold rounded-lg"
+                            className="py-2 px-6 bg-black  transition-all text-white  font-semibold rounded-sm"
                           >
                             {" "}
-                            Delete Item
+                            {isLoadingCartDelete ? (
+                              <ThreeDots
+                                visible={true}
+                                height="24"
+                                width="82"
+                                color="#ffffff"
+                                secondaryColor="#EFE6E3"
+                                ariaLabel="oval-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                              />
+                            ) : (
+                              " Delete Item"
+                            )}{" "}
                           </button>
                         )}
                       </div>
                     ) : (
-                      <div className=" flex items-center w-16 mx-5 h-16 justify-center">
-                        {" "}
-                        <Loader />{" "}
-                      </div>
+                      ""
                     )}
                     {!isFetchingWish ? (
                       <div>
                         {!checkInInWishlist ? (
                           <button
                             onClick={addItemsToWishlist}
-                            className=" py-2 px-6 bg-white  outline-2  outline  outline-gray-200 hover:outline-gray-300 transition-all text-gray-700  font-semibold rounded-lg"
+                            className=" py-2 px-6 bg-white  outline-2  outline  outline-gray-200 hover:outline-gray-300 transition-all text-gray-700  font-semibold rounded-sm"
                           >
-                            Add To Wish List
+                            {isLoadingWish ? (
+                              <ThreeDots
+                                visible={true}
+                                height="24"
+                                width="82"
+                                color="black"
+                                secondaryColor="black"
+                                ariaLabel="oval-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                              />
+                            ) : (
+                              "                            Add To Wish List"
+                            )}
                           </button>
                         ) : (
                           <button
                             onClick={deleteWishlistItems}
-                            className=" py-2 px-6 bg-white  outline-2  outline  outline-gray-200 hover:outline-gray-300 transition-all text-gray-700  font-semibold rounded-lg"
+                            className=" py-2 px-6 bg-white  outline-2  outline  outline-gray-200 hover:outline-gray-300 transition-all text-gray-700  font-semibold rounded-sm"
                           >
-                            Delete from wishlist
+                            {isLoadingDeleteWish ? (
+                              <ThreeDots
+                                visible={true}
+                                height="24"
+                                width="100"
+                                color="black"
+                                secondaryColor="black"
+                                ariaLabel="oval-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                              />
+                            ) : (
+                              "  Delete from wishlist"
+                            )}{" "}
                           </button>
                         )}
                       </div>
                     ) : (
-                      <div className=" flex items-center  w-16 mx-5 h-16 justify-center">
-                        {" "}
-                        <Loader />{" "}
-                      </div>
+                      ""
                     )}
                   </div>
                 )}
@@ -283,8 +329,8 @@ const isInWishlist = Array.isArray(wishlistData?.data)
             </div>
             <Tooltip id="my-tooltip" />
           </div>
-          <div className="  max-w-6xl mx-auto">
-            <h2 className=" mt-24 text-xl font-bold text-omar">
+          <div className="   mx-4">
+            <h2 className=" mt-24 text-xl font-bold text-black">
               Products you might like
             </h2>
             <Slider {...settings}>
@@ -300,5 +346,6 @@ const isInWishlist = Array.isArray(wishlistData?.data)
         </>
       );
 }
+
 
 export default ProductDetails

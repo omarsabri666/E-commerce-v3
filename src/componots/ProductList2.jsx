@@ -46,7 +46,7 @@ function ProductList2() {
   return (
     <>
       {filteredItems?.length ? (
-        <div className=" grid md:grid-cols-4 grid-cols-2 sm:grid-cols-3 md:gap-4  gap-1 ">
+        <div className=" grid md:grid-cols-4 grid-cols-2 sm:grid-cols-3 md:gap-4  gap-2 ">
           {filteredItems?.map((item) => (
             <Product key={item._id} product={item} />
           ))}

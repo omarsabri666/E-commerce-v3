@@ -3,10 +3,11 @@
 //   return formattedPrice;
 // }
 export function formatPriceInEGP(price) {
-  const formatter = new Intl.NumberFormat("eng-EG", {
+  const usdPrice = price / 50;
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "EGP",
+    currency: "USD",
   });
 
-  return formatter.format(price);
+  return formatter.format(usdPrice);
 }

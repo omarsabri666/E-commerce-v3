@@ -39,7 +39,7 @@ const navigate = useNavigate()
         >
           <img
             src={item.imageCover}
-            className="  md:w-40 md:h-40 rounded-lg shadow-xl  w-24 h-28"
+            className="  md:w-40 md:h-40 rounded-lg shadow-sm  w-24 h-28"
             alt={`${item.title}img`}
           />
           <div className="  w-10  md:w-36  ">
@@ -47,19 +47,19 @@ const navigate = useNavigate()
           </div>
         </div>
 
-        <h3 className=" text-omar font-bold">{formatPriceInEGP(item.price)}</h3>
+        <h3 className=" text-black font-bold">{formatPriceInEGP(item.price)}</h3>
         <div className="   flex-wrap  flex gap-1 md:gap-8 items-center">
           <button
             aria-label="delete button"
             disabled={isLoading}
             onClick={deleteWishlistItems}
-            className=" text-red-600 text-3xl"
+            className=" text-black text-3xl"
           >
             <AiFillDelete />
           </button>
           <button
             onClick={mutate}
-            className="  outline outline-[#ff3c20]   hover:text-white hover:bg-omar transition-all  rounded-full text-black text-lg font-bold px-4 py-2 md:px-8 md:py-3"
+            className="  outline outline-[#000]   hover:text-white hover:bg-black transition-all  rounded-sm text-black text-lg font-bold px-4 py-2 md:px-8 md:py-3"
           >
             Add To Cart
           </button>

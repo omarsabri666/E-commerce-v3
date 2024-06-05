@@ -61,7 +61,7 @@ function WishList() {
         </div>
       );
   return (
-    <div className="max-w-6xl flex-col flex-wrap flex gap-6 mx-auto my-10">
+    <div className="max-w-6xl flex-col flex-wrap flex gap-6 px-2 md:px-0 mx-auto my-10">
       {wishlistData?.data && Array.isArray(wishlistData?.data) && (
         wishlistData.data.map((item, i) => (
           <WishlistItem key={i} item={item} />

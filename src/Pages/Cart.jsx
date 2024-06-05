@@ -71,12 +71,7 @@ function Cart() {
     );
 
   //Request failed with status code 404 error is
-  if (isRefetching)
-    return (
-      <div className=" flex items-center justify-center">
-        <Loader />
-      </div>
-    );
+  
   if(!user) return <div className=" flex-col my-10 flex justify-center items-center">
 
     <h2 className="  text-3xl font-semibold">You need to Sign in First</h2>
@@ -90,27 +85,27 @@ function Cart() {
       <Link className=" bg-black text-white px-6 py-2 rounded-xl my-4 font-semibold " to="/">Keep Looking</Link>
     </div>;
   return (
-    <div className=" max-w-6xl flex-col flex   gap-6 mx-auto my-10">
+    <div className=" max-w-6xl flex-col flex px-2 md:px-0   gap-6 mx-auto my-10">
       {data?.data.products.map((item, i) => (
         <CartItem key={i} item={item} />
       ))}
       <div className=" flex items-center justify-around my-5 gap-4">
         <div className=" flex   items-center gap-4">
           <h2 className=" font-bold text-lg">Total Cart : </h2>
-          <h3 className=" text-omar font-bold text-lg">
+          <h3 className=" text-black font-bold text-lg">
             {formatPriceInEGP(data?.data.totalCartPrice)}
           </h3>
         </div>
-        <div className="   flex gap-2 ">
+        <div className="     flex-wrap  flex gap-2 ">
           <button
             onClick={mutate}
-            className=" bg-red-600 text-center hover:bg-red-800  transition-all px-4 py-2  md:px-8 md:py-3 text-white font-semibold text-lg rounded-lg"
+            className=" bg-red-600 text-center hover:bg-red-800  text-sm transition-all px-4 py-2  md:px-8 md:py-3 text-white font-semibold md:text-lg rounded-sm"
           >
             Clear Cart
           </button>
           <Link
             to="/checkout"
-            className=" hover:bg-black outline px-4 py-2 outline-black text-lg font-bold hover:text-white transition-all md:px-10 md:py-4 rounded-lg  text-black"
+            className=" hover:bg-black outline px-4 py-2 text-sm outline-black md:text-lg font-bold hover:text-white transition-all md:px-10 md:py-4 rounded-sm  text-black"
           >
             Check Out
           </Link>

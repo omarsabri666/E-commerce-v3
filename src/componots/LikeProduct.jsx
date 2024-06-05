@@ -19,7 +19,7 @@ function LikeProduct({product,img}) {
          }
        }
     return (
-      <div className="  flex border   text-center  px-16  shadow-lg max-h-max flex-wrap flex-col gap-2 justify-center items-center my-10">
+      <div className="  flex border  mx-2  text-center      rounded-sm     p-5  shadow-sm max-h-max h-auto sm:h-[440px]  flex-wrap flex-col gap-2 justify-center items-center my-10">
         <div className=" relative ">
           <img
             onClick={goSomewhere}
@@ -28,8 +28,8 @@ function LikeProduct({product,img}) {
             src={product.imageCover}
             alt={`${product.title} img`}
           />
-          {product.priceAfterDiscount ? (
-            <div className=" bg-omar absolute top-1 right-1 w-10 h-10 flex justify-center items-center  rounded-full">
+          {/* {product.priceAfterDiscount ? (
+            <div className="   absolute top-1 right-1 w-10 h-10 flex justify-center items-center  rounded-full">
               <p className=" text-white font-bold  ">
                 {(
                   -(
@@ -42,7 +42,7 @@ function LikeProduct({product,img}) {
             </div>
           ) : (
             ""
-          )}
+          )} */}
         </div>
         <Link
           onClick={goSomewhere}
@@ -53,7 +53,7 @@ function LikeProduct({product,img}) {
         </Link>
         {product.priceAfterDiscount ? (
           <div className="gap-5 py-2  text-sm  justify-center items-center   text-center   flex">
-            <h4 className="text-omar font-semibold">
+            <h4 className="text-black font-semibold">
               {formatPriceInEGP(product?.priceAfterDiscount)}
             </h4>
             <h4 className="line-through text-gray-600">
