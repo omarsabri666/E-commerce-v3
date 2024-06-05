@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import LikeProduct from "./LikeProduct";
 import { ThreeDots } from "react-loader-spinner";
+import  Modal  from "./Modal";
 
  const settings = {
    infinite: true,
@@ -63,6 +64,15 @@ const{data:likeProduct,isLoading:isLo}= useQuery({queryFn:()=>selectCategory(dat
       () => data?.data?.imageCover || ""
     );
     const queryClient = useQueryClient()
+    const [showFirstTime, setShowFirstTime] = useState(false);
+     useEffect(() => {
+       const timer = setTimeout(() => {
+         setShowFirstTime(true);
+       }, 6000);
+
+       // Cleanup the timeout when the component unmounts
+       return () => clearTimeout(timer);
+     }, []);
     
     const {mutate,isLoading,} = useMutation({mutationFn:()=>addCartItems(id) ,onSuccess:()=>{
 
@@ -133,15 +143,16 @@ const isInWishlist = Array.isArray(wishlistData?.data)
  }, [id]);
 
     const mainImgSrc = selectedImg || data?.data.imageCover;
+    const [isOpen, setIsOpen] = useState(true);
     if (isLoadingProduct || isLo) return <div className=" flex justify-center items-center"><Loader/></div>
     if(isError) return <div className=" text-red-500 font-bold text-2xl flex justify-center items-center">
       <p>Error {error.message}</p>
     </div>
       return (
         <>
-          <div className=" my-10  grid  mx-7 md:flex font-abc  md:justify-around  md:mx-0 grid-cols-1 gap-6   ">
+          <div className=" my-10  grid overflow-x-hidden   mx-7 md:flex font-abc  md:justify-around  md:mx-0 grid-cols-1 gap-6   ">
             <div className=" col-span-2 md:items-center md:justify-center flex-col-reverse md:flex-row  md:basis-1/2 gap-4 flex ">
-              <div className=" flex   justify-center items-center gap-1 md:flex-col ">
+              <div className=" flex  flex-wrap  justify-center items-center gap-1 md:flex-col ">
                 {data?.data.images?.map((img, i) => (
                   <ImgSlider
                     setSelectedImg={setSelectedImg}
@@ -343,6 +354,10 @@ const isInWishlist = Array.isArray(wishlistData?.data)
               ))}
             </Slider>
           </div>
+
+{
+  (!token&& showFirstTime) && <Modal isOpen={isOpen}  setIsOpen={setIsOpen}/>
+}
         </>
       );
 }

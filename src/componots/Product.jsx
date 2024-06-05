@@ -236,9 +236,7 @@ const isInWishlist = Array.isArray(wishlistItems?.data)
                 <button className="bg-black  text-white py-2 px-2 ">
                   <AiFillHeart
                     onClick={handleAddToWishList}
-                    data-tooltip-id="my-tooltip"
-                    data-tooltip-content="Add to wish List"
-                    data-tooltip-place="right"
+                 
                     size={20}
                   />
                 </button>
@@ -262,7 +260,6 @@ const isInWishlist = Array.isArray(wishlistItems?.data)
             </div>
           )}
         </div>
-        <Tooltip id="my-tooltip" />
       </div>
     );
 }
