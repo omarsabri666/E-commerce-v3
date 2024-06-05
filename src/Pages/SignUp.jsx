@@ -42,8 +42,11 @@ handleSignUp()
       }
     return (
       <>
-        <form onSubmit={handleSubmit(onSubmit)} className="  px-4 md:px-0    my-16 ">
-          <div className="  max-w-4xl  rounded-lg  mx-auto  shadow-xl">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="  px-4 md:px-0    my-16 "
+        >
+          <div className="  max-w-4xl  rounded-lg  mx-auto  shadow-md">
             <div className=" px-4 md:px-0 gap-2 max-w-3xl mx-auto  flex-wrap flex flex-col">
               <h2 className=" text-center text-xl font-bold">Sign Up</h2>
               <div className=" flex flex-wrap gap-4">
@@ -53,7 +56,7 @@ handleSignUp()
                   </label>
                   <input
                     required
-                    className="  py-2  rounded-lg  px-4   focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                    className="  py-2  rounded-lg  px-4  outline outline-gray-300      focus:outline-none focus:ring focus:ring-orange-300  "
                     placeholder="E.G omar sabry"
                     id="name"
                     type="text"
@@ -66,7 +69,7 @@ handleSignUp()
                   </label>
                   <input
                     required
-                    className="  py-2  rounded-lg  px-4  focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                    className="  py-2  rounded-lg  px-4 outline outline-gray-300  focus:outline-none focus:ring focus:ring-orange-300  "
                     placeholder="Example@gmail.com"
                     id="email"
                     type="email"
@@ -84,7 +87,7 @@ handleSignUp()
                     required
                     minLength={7}
                     maxLength={50}
-                    className=" py-2  px-4 rounded-lg  w-full  focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                    className=" py-2  px-4 rounded-lg  w-full outline outline-gray-300  focus:outline-none focus:ring focus:ring-orange-300  "
                     id="password"
                     placeholder="your Password"
                     type={togglePassword ? "text" : "password"}
@@ -114,7 +117,7 @@ handleSignUp()
                     required
                     minLength={7}
                     maxLength={50}
-                    className=" py-2  px-4 rounded-lg w-full   focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                    className=" py-2  px-4 rounded-lg w-full outline outline-gray-300   focus:outline-none focus:ring focus:ring-orange-300  "
                     id="rePassword"
                     placeholder="Confirm Password"
                     type={togglePassword2 ? "text" : "password"}
@@ -129,15 +132,15 @@ handleSignUp()
                     type="button"
                     className=" text-xl transform -translate-y-1/2 absolute right-2 top-1/2"
                     onClick={togglePasswordVis2}
-                    >
+                  >
                     {togglePassword2 ? <AiFillEye /> : <AiFillEyeInvisible />}
                   </button>
                 </div>
-                      {errors.rePassword && (
-                        <span className="text-red-600  my-1 -bottom-4 left-0">
-                          {errors.rePassword.message}
-                        </span>
-                      )}
+                {errors.rePassword && (
+                  <span className="text-red-600  my-1 -bottom-4 left-0">
+                    {errors.rePassword.message}
+                  </span>
+                )}
               </div>
               <div className=" flex flex-col gap-1">
                 <label className="  font-semibold" htmlFor="phone">
@@ -147,7 +150,7 @@ handleSignUp()
                   required
                   minLength={7}
                   maxLength={50}
-                  className=" py-2  px-4 rounded-lg   focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                  className=" py-2  px-4 rounded-lg  outline outline-gray-300  focus:outline-none focus:ring focus:ring-orange-300  "
                   id="phone"
                   placeholder="phone"
                   type="number"

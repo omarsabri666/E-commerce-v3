@@ -47,9 +47,9 @@ queryClient.invalidateQueries(["wishlist",cart])
         <ul className=" w-fit  shadow-lg rounded-lg  border-2 border-gray-200  flex flex-col gap-2">
           
            
-            <Link className=" text-lg hover:text-omar transition-all px-6 py-2 font-semibold" to="/address">
+            {/* <Link className=" text-lg hover:text-omar transition-all px-6 py-2 font-semibold" to="/address">
              My addresse
-            </Link>
+            </Link> */}
             <button onClick={handleClick} className=" bg-omar text-white font-semibold text-lg px-6 py-2 rounded-lg">Sign Out</button>
             
         </ul>

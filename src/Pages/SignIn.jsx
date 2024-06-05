@@ -56,8 +56,11 @@ function SignIn() {
 
     
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="  px-4 md:px-0    my-16 ">
-        <div className="  max-w-xl  rounded-lg  mx-auto  shadow-xl">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="  px-4 md:px-0     my-16 "
+      >
+        <div className="  max-w-xl  rounded-lg  mx-auto  shadow-md ">
           <div className=" px-2 md:px-0 gap-2 max-w-lg mx-auto  flex-wrap flex flex-col">
             <h2 className=" text-center text-xl font-bold">Login</h2>
             <div className=" flex flex-col gap-1">
@@ -66,7 +69,7 @@ function SignIn() {
               </label>
               <input
                 defaultValue="morasabri422@gmail.com"
-                className="  py-2  rounded-lg  px-4  focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                className="  py-2  rounded-lg  px-4  outline outline-gray-300    focus:outline-none focus:ring focus:ring-orange-300  "
                 placeholder="Example@gmail.com"
                 id="email"
                 type="email"
@@ -79,8 +82,8 @@ function SignIn() {
               </label>
               <div className=" relative">
                 <input
-                defaultValue='123456789'
-                  className=" py-2  px-4 rounded-lg w-full   focus:outline-none focus:ring focus:ring-orange-300 shadow-xl "
+                  defaultValue="123456789"
+                  className=" py-2  px-4 rounded-lg w-full  outline outline-gray-300      focus:outline-none focus:ring focus:ring-orange-300  "
                   id="password"
                   placeholder="your Password"
                   type={togglePassword2 ? "text" : "password"}
