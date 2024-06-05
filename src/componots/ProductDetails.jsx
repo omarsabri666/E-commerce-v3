@@ -331,11 +331,11 @@ const isInWishlist = Array.isArray(wishlistData?.data)
                     )}
                   </div>
                 )}
-                {!token && (
+                {/* {!token && (
                   <h2 className=" text-omar font-semibold text-3xl ">
                     you need to Sign in to Add items to cart !
                   </h2>
-                )}
+                )} */}
               </div>
             </div>
             <Tooltip id="my-tooltip" />
